@@ -1,0 +1,16 @@
+{
+	"name": "EIA Dev Environment",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	},
+	"postCreateCommand": "git config --global user.name 'Your Name' && git config --global user.email 'your.email@example.com'",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.vscode-json",
+				"ms-vscode.vscode-yaml"
+			]
+		}
+	}
+}
