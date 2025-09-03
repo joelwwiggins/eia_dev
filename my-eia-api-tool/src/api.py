@@ -8,6 +8,6 @@ def get_data(endpoint, api_key):
     response = requests.get(url, headers=headers, params=params)
 
     if response.status_code != 200:
-        raise Exception(f"Error: {response.status_code}, {response.text}")
+        raise Exception(f"Error: {response.status_code}, URL: {url}, Response: {response.text}")
 
     return response.json()

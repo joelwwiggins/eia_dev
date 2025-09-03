@@ -11,7 +11,7 @@ api_key = os.getenv('EIA_API_KEY')
 
 if api_key:
     # Example API endpoint (replace with actual endpoint as needed)
-    endpoint = 'v2/seriesid/TOTAL.TETCBUS.M/data/'
+    endpoint = 'v2/total-energy/data/'
     
     # Call the function to get data from the API
     response_data = get_data(endpoint, api_key)
