@@ -9,6 +9,7 @@ Tools exposed:
 Environment:
 - EIA_API_KEY must be set (optionally via my-eia-api-tool/.env)
 """
+
 from __future__ import annotations
 
 import os
@@ -30,7 +31,9 @@ mcp = FastMCP("eia-api")
 
 
 @mcp.tool()
-def eia_get_data(endpoint: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def eia_get_data(
+    endpoint: str, params: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
     """Fetch data from the EIA API.
 
     Args:

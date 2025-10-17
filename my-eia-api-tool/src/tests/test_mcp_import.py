@@ -9,5 +9,5 @@ def test_import_mcp_server_module():
     except Exception:  # broad to handle envs lacking MCP
         pytest.skip("mcp package not available; skipping MCP import smoke test")
 
-    module = importlib.import_module('src.mcp_server')
-    assert hasattr(module, 'mcp')
+    module = importlib.import_module("src.mcp_server")
+    assert hasattr(module, "mcp")
