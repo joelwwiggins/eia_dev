@@ -22,16 +22,10 @@ my-eia-api-tool
    cd my-eia-api-tool
    ```
 
-2. **Create a virtual environment (optional but recommended):**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
 
-3. **Install the required dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+
+
+2. **Install the required dependencies:**
 
 4. **Set up the environment variables:**
    Create a `.env` file in the root directory and add your API key:

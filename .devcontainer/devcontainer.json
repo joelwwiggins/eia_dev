@@ -4,10 +4,10 @@
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
         "ghcr.io/devcontainers/features/python:1": {
-            "installTools": false
+            "installTools": true
         }
     },
-    "postCreateCommand": "git config --global user.name 'Your Name' && git config --global user.email 'your.email@example.com'",
+    "postCreateCommand": "bash -lc 'set -euo pipefail; git config --global user.name \"Your Name\" && git config --global user.email \"your.email@example.com\"; python3 -m pip install --upgrade pip; python3 -m pip install -r /workspaces/eia_dev/my-eia-api-tool/requirements.txt'",
     "customizations": {
         "vscode": {
             "extensions": [
