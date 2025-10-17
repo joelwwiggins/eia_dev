@@ -1,8 +1,14 @@
-requests
-python-dotenv
-pandas
-numpy
-pytest
-pytest-cov
-flake8
-black
+requests>=2.31.0
+python-dotenv>=1.0.1
+# Optional analytics libs
+pandas>=2.2.0
+numpy>=1.26.0
+
+# Testing and linting
+pytest>=8.0.0
+pytest-cov>=4.1.0
+flake8>=6.1.0
+black>=24.3.0
+
+# MCP server SDK
+mcp>=1.2.0

@@ -1,13 +1,12 @@
+from src.api import get_data
+from unittest.mock import patch, MagicMock
+import pytest
 import os
 import sys
 from pathlib import Path
 
 # Add the project root to the path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
-import pytest
-from unittest.mock import patch, MagicMock
-from src.api import get_data
 
 
 def test_get_data_success():
