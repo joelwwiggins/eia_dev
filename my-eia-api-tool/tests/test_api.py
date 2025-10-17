@@ -1,12 +1,7 @@
 import os
 import pytest
 from unittest.mock import patch, MagicMock
-from pathlib import Path
-from dotenv import load_dotenv
 from my_eia_api_tool.src.api import get_data
-
-# Load environment variables for integration tests
-load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env")
 
 
 def test_get_data_success():
@@ -39,6 +34,15 @@ def test_get_data_failure():
 @pytest.mark.integration
 def test_eia_api_returns_data():
     """Integration test: Test that the EIA API returns actual data"""
+    # Try to load .env file if dotenv is available
+    try:
+        from pathlib import Path
+        from dotenv import load_dotenv
+
+        load_dotenv(dotenv_path=Path(__file__).resolve().parents[1] / ".env")
+    except ImportError:
+        pass  # dotenv not installed, rely on environment variables
+
     api_key = os.getenv("EIA_API_KEY")
 
     if not api_key:
