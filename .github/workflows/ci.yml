@@ -27,4 +27,6 @@ jobs:
     - name: Format with black
       run: black --check --diff my-eia-api-tool/src
     - name: Run tests
-      run: pytest my-eia-api-tool/tests --cov=my-eia-api-tool/src --cov-report=xml
+      run: |
+        cd my-eia-api-tool
+        pytest tests --cov=src --cov-report=xml

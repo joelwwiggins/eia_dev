@@ -1,7 +1,13 @@
 import os
+import sys
+from pathlib import Path
+
+# Add the project root to the path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import pytest
 from unittest.mock import patch, MagicMock
-from my_eia_api_tool.src.api import get_data
+from src.api import get_data
 
 
 def test_get_data_success():
@@ -10,9 +16,7 @@ def test_get_data_success():
     mock_response.status_code = 200
     mock_response.json.return_value = {"data": "test"}
 
-    with patch(
-        "my_eia_api_tool.src.api.requests.get", return_value=mock_response
-    ) as mock_get:
+    with patch("requests.get", return_value=mock_response) as mock_get:
         result = get_data("test/endpoint", "fake_key")
         assert result == {"data": "test"}
         mock_get.assert_called_once()
@@ -24,9 +28,7 @@ def test_get_data_failure():
     mock_response.status_code = 404
     mock_response.text = "Not found"
 
-    with patch(
-        "my_eia_api_tool.src.api.requests.get", return_value=mock_response
-    ) as mock_get:
+    with patch("requests.get", return_value=mock_response) as mock_get:
         with pytest.raises(Exception, match="Error: 404"):
             get_data("test/endpoint", "fake_key")
 
