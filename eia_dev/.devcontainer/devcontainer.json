@@ -1,0 +1,14 @@
+{
+    "name": "EIA Development Tool",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "settings": {
+        "python.pythonPath": "/usr/local/bin/python3"
+    },
+    "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+    ],
+    "postCreateCommand": "pip install -r my-eia-api-tool/requirements.txt",
+    "remoteUser": "vscode"
+}
