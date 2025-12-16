@@ -16,9 +16,43 @@ This document provides guidance on how to integrate the EIA API tool with langua
 
 To start the API server, execute the following command in the terminal:
 ```
-python my-eia-api-tool/src/server.py
+uvicorn src.server:app --reload --port 8000
 ```
 The server will run locally, typically accessible at `http://localhost:8000`.
+
+## Launching the MCP Server (stdio)
+
+To expose EIA tools to an MCP-capable LLM host (Claude Desktop / IDE MCP clients), run:
+
+```bash
+export EIA_API_KEY=your_api_key_here
+python -m src.mcp_server
+```
+
+This starts an MCP server over stdio and exposes tools like `eia_fetch`.
+
+## Testing With Ollama (Open Source)
+
+Ollama doesn't speak MCP directly, so this repo includes a small bridge that lets an Ollama model call MCP tools.
+
+1. Install Ollama and pull a model (example):
+
+```bash
+ollama pull llama3.2
+```
+
+2. Run a tool-enabled chat (bridge starts the MCP server automatically):
+
+```bash
+cd my-eia-api-tool
+export EIA_API_KEY=your_api_key_here
+python examples/ollama_mcp_chat.py --model llama3.2 \
+   --prompt "Use tools to fetch a small EIA sample for 2023."
+```
+
+Notes:
+- Set `OLLAMA_HOST` if your Ollama daemon is not at `http://127.0.0.1:11434`.
+- The bridge uses the MCP stdio server at `python -m src.mcp_server`.
 
 ## Querying Data via Language Models
 

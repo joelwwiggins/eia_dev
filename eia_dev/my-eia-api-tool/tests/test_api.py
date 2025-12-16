@@ -1,4 +1,4 @@
-from src.api import get_data
+from src.api import EIAApiError, get_data
 from unittest.mock import patch, MagicMock
 import pytest
 import os
@@ -26,8 +26,9 @@ def test_get_data_failure():
     mock_response.text = "Not found"
 
     with patch("requests.get", return_value=mock_response) as mock_get:
-        with pytest.raises(Exception, match="Error: 404"):
+        with pytest.raises(EIAApiError) as exc:
             get_data("test/endpoint", "fake_key")
+        assert exc.value.status_code == 404
 
 @pytest.mark.integration
 def test_eia_api_returns_data():

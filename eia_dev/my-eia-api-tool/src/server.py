@@ -1,6 +1,8 @@
-from fastapi import FastAPI
-import requests
 import os
+
+from fastapi import FastAPI, HTTPException
+
+from src.api import EIAApiError, get_data
 
 app = FastAPI()
 
@@ -8,13 +10,16 @@ app = FastAPI()
 def query_eia(category: str, year: int):
     api_key = os.getenv("EIA_API_KEY")
     if not api_key:
-        return {"error": "API key not provided."}
+        raise HTTPException(status_code=403, detail="EIA_API_KEY not set")
 
-    response = requests.get(f"https://api.eia.gov/v2/{category}?api_key={api_key}&data[]=value&start={year}&end={year}")
-    
-    if response.status_code != 200:
-        return {"error": f"Error fetching data: {response.status_code}"}
-    
-    return response.json()
+    try:
+        return get_data(
+            endpoint=category,
+            api_key=api_key,
+            params={"data[]": ["value"], "start": year, "end": year},
+        )
+    except EIAApiError as exc:
+        detail = exc.response_text or str(exc)
+        raise HTTPException(status_code=exc.status_code, detail=detail) from exc
 
 # Run with: uvicorn server:app --reload

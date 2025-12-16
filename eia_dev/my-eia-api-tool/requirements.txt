@@ -4,3 +4,5 @@ python-dotenv
 pydantic
 pytest
 httpx
+mcp
+uvicorn

@@ -50,7 +50,7 @@ Before you begin, ensure you have the following installed:
    Start the FastAPI server:
 
    ```
-   python src/server.py
+   uvicorn src.server:app --reload --port 8000
    ```
 
    The server will start running on `http://localhost:8000`.
@@ -66,5 +66,12 @@ You can now make API calls to the EIA data endpoints. Use the provided examples 
 ## Next Steps
 
 Explore the `docs` directory for more detailed usage instructions and integration examples with language models.
+
+If you want to connect an MCP-capable LLM host, run the stdio MCP server:
+
+```bash
+export EIA_API_KEY=your_api_key_here
+python -m src.mcp_server
+```
 
 Happy querying!
